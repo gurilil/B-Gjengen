@@ -19,5 +19,11 @@ def NN(layers):
     return (biases, weights)
 
         
-def predict(inp,NN):
+def predict(inp,nn):
+    h = len(nn[0])-1
+    a=[sigmoid(numpy.dot(nn[1][0],inp)-nn[0][0])]
     
+    for i in range(1,h+1):
+        a.append(sigmoid(numpy.dot(nn[1][i],a[i-1])-nn[0][i]))
+
+    return a
